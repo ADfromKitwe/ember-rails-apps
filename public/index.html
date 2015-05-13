@@ -1,0 +1,150 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <script src="js/libs/jquery-1.11.2.min.js"></script>
+    <script src="js/libs/handlebars-v1.3.0.js"></script>
+    <script src="js/libs/ember.js"></script>
+    <script src="js/libs/ember-data.js"></script>
+    <script src="js/libs/app.js"></script>
+    
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen" rel="stylesheet">
+  </head>
+  
+  <body>
+    <script type="text/x-handlebars">
+    <nav class="navbar navbar-default">
+      <h1 class="text-center">Bear Renovations and Improvements</h1>
+      <ul class="nav navbar-nav">
+        <li>{{#link-to 'about'}}About{{/link-to}}</li>
+        <li>{{#link-to 'services'}}Services{{/link-to}}</li>
+        <li>{{#link-to 'reviews'}}Reviews{{/link-to}}</li>
+        <li>{{#link-to 'projects'}}Projects{{/link-to}}</li>
+      </ul>
+    </nav>
+    {{outlet}}
+    </script>
+    
+    <script type="text/x-handlebars" data-template-name="about">
+      <p>Welcome to Brother Bear's delicious home renovations</p>
+    </script>
+    
+    <script type="text/x-handlebars" data-template-name="services">
+      <p>We offer many services, customized to the individual needs of the client</p>
+    </script>
+    
+    <script type="text/x-handlebars" data-template-name="reviews">
+      <p class="text-muted">Review our service</p>
+      <ul>
+      {{#each model}}
+          <li>"{{review}}"  -{{reviewer}}</li>
+      {{/each}}
+    </ul>
+    </script>
+    
+    <!-- use an example from codeschool -->
+    <script type="text/x-handlebars" data-template-name="projects">
+      <p>Here are some of our current projects</p>
+      
+      <button type="button" type="btn btn-default btn-xs" {{action 'viewAll'}}>All({{numTotal}})</button>
+      <button type="button" type="btn btn-default btn-xs" {{action 'viewCompleted'}}>Completed({{numCompleted}})</button>
+      <button type="button" type="btn btn-default btn-xs" {{action 'viewInProgress'}}>In Progress({{numInProgress}})</button>
+      
+      <div class='row'>
+        <div class='col-sm-3'>
+          <div class='list-group'>
+            <ul>
+              {{#if seeCompleted}}
+                {{#each completedProjects}}
+                  <li>{{#link-to 'project' this}}{{title}}{{/link-to}}</li>
+                {{/each}}
+              {{else}}
+                {{#if seeInProgress}}
+                  {{#each inProgressProjects}}
+                    <li>{{#link-to 'project' this}}{{title}}{{/link-to}}</li>
+                  {{/each}}
+                {{else}}
+                {{#each model}}
+                  <li>{{#link-to 'project' this}}{{title}}{{/link-to}}</li>
+                {{/each}}
+                {{/if}}
+              {{/if}}
+          </ul>
+          {{#link-to 'new' tagName='button'}}Create new project{{/link-to}}
+          </div>
+        </div>
+        <div class='col-sm-9'>
+          {{outlet}}
+        </div>
+      </div>
+    </script>
+    
+    
+    <script type="text/x-handlebars" data-template-name="projects/index">
+      <p class='text-muted'>Choose a project from the left</p>     
+    </script>
+      
+    
+    <script type="text/x-handlebars" data-template-name="project">
+      <h1>{{title}}</h1>
+      <p>{{description}}</p>
+      <p>Price: ${{price}}</p>
+      <p>Customer: {{customer}}</p>
+      
+      {{#if isComplete}}
+      <p>
+        <span class="label label-success">
+          Complete
+        </span>
+      </p> 
+      {{else}}
+      <p>
+        <span class= "label label-danger">
+          In Progress
+        </span>
+      </p>
+      {{/if}}
+      
+      {{#if isEditing}}
+        {{partial 'project/edit'}}
+        <button {{action 'doneEditing'}}>Done</button>
+      {{else}}
+        <button {{action 'edit'}}>Edit</button>
+        <button {{action 'removeProject'}}>Delete</button>
+
+      {{/if}}
+    </script>
+    
+    <script type="text/x-handlebars" data-template-name="project/_edit">
+      {{partial 'form'}}
+    </script>
+  
+    <script type="text/x-handlebars" data-template-name="new">
+      <h2>Add a New Project</h2>
+      {{partial 'form'}}
+
+      <button {{action 'createProject'}}>Save</button>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="_form">
+      <p>{{input type="text" value=title}}</p>
+      {{#if errors}}
+      {{#each errors.title}}
+      <p>{{error.message}}</p>
+      {{/each}}{{/if}}
+      
+
+      <p>{{textarea value=description}}</p>
+      
+      <p>{{input type="text" value=price}}</p>
+      <p>{{input type="text" value=customer}}</p>
+      <p>{{view "select" 
+          value=isComplete
+          content=choices
+          optionValuePath="content.choiceValue"
+          optionLabelPath="content.choiceLabel"}}</p>
+          
+    </script>
+        
+    
+  </body>
+</html>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  price: 1
+  description: MyText
+  customer: MyString
+  isComplete: false
+
+two:
+  title: MyString
+  price: 1
+  description: MyText
+  customer: MyString
+  isComplete: false

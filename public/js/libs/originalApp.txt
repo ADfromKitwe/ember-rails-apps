@@ -1,0 +1,90 @@
+var App = Ember.Application.create({
+  LOG_TRANSITIONS: true
+});
+
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+  host: 'http://localhost:3000'
+});
+
+App.Router.map(function() {
+  this.route('index', { path: '/'});
+  this.resource('about');
+  this.resource('services');
+  this.resource('reviews');
+  this.resource('projects', function() {
+    this.resource('project', { path: ':project_id'});
+/*    this.route('completed', {path: '/complete'}); */
+  });
+  this.route('projects.completed', {path: '/complete'});
+});
+
+/* bit of testing, don't know how models/arrays work */
+App.Project = DS.Model.extend({
+  title: DS.attr('string'),
+  price: DS.attr('number'),
+  description: DS.attr('string'),
+  customer: DS.attr('string'),
+  isComplete: DS.attr('boolean')
+});
+
+App.Review = DS.Model.extend({
+  review: DS.attr('string'),
+  reviewer: DS.attr('string')
+});
+
+App.ReviewsRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('review');
+  }
+}); 
+
+App.ProjectsRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.findAll('project');
+    /* return this.store.find('project'); */
+  }
+});
+
+App.ProjectsIndexRoute = Ember.Route.extend({
+  model: function() {
+    return this.modelFor('projects');
+  }
+});
+
+App.ProjectsCompletedRoute = Ember.Route.extend({
+  model: function() {
+      return this.store.filter('project', function(project) {
+      return project.get('isComplete');
+    });
+  },
+  renderTemplate: function(controller) {
+    this._super(controller);
+    this.render('projects', {into: 'application', controller: controller});
+  }
+});
+
+App.ProjectRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('project', params.project_id);
+  }
+});
+
+App.ProjectController = Ember.ObjectController.extend({
+  isEditing: false,
+  
+  actions: {
+    edit: function() {
+      this.set('isEditing', true);
+    },
+    doneEditing: function() {
+      this.set('isEditing', false);
+      this.get('model').save();
+    }
+  },
+    
+  choices: [
+    {choiceLabel: "Complete", choiceValue: true },
+    {choiceLabel: "In Progress", choiceValue: false}
+  ]
+  
+});
