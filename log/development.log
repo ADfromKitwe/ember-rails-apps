@@ -16425,3 +16425,72 @@ Processing by ProjectsController#create as JSON
   [1m[36m (0.2ms)[0m  [1mBEGIN[0m
   [1m[35m (3.4ms)[0m  ROLLBACK
 Completed 422 Unprocessable Entity in 10ms (Views: 0.5ms | ActiveRecord: 3.6ms)
+  [1m[36m (23.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (25.3ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateProjects (20150421020523)
+  [1m[35m (18.7ms)[0m  CREATE TABLE `projects` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `price` int(11), `description` text, `customer` varchar(255), `isComplete` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150421020523')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateReviews (20150503221743)
+  [1m[35m (19.4ms)[0m  CREATE TABLE `reviews` (`id` int(11) auto_increment PRIMARY KEY, `review` text, `reviewer` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150503221743')
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+
+
+Started GET "/reviews" for 127.0.0.1 at 2015-06-01 07:36:29 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ReviewsController#index as JSON
+  [1m[35mReview Load (0.2ms)[0m  SELECT `reviews`.* FROM `reviews`
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-06-01 07:36:30 -0400
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.3ms)[0m  [1mSELECT `projects`.* FROM `projects`[0m
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2015-06-01 07:36:33 -0400
+Processing by ReviewsController#index as JSON
+  [1m[35mReview Load (0.3ms)[0m  SELECT `reviews`.* FROM `reviews`
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-06-01 07:36:34 -0400
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.4ms)[0m  [1mSELECT `projects`.* FROM `projects`[0m
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2015-06-01 07:36:39 -0400
+Processing by ReviewsController#index as JSON
+  [1m[35mReview Load (0.3ms)[0m  SELECT `reviews`.* FROM `reviews`
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-06-01 07:36:40 -0400
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.3ms)[0m  [1mSELECT `projects`.* FROM `projects`[0m
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2015-06-01 07:36:41 -0400
+Processing by ReviewsController#index as JSON
+  [1m[35mReview Load (0.3ms)[0m  SELECT `reviews`.* FROM `reviews`
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2015-06-01 07:36:42 -0400
+Processing by ProjectsController#index as JSON
+  [1m[36mProject Load (0.3ms)[0m  [1mSELECT `projects`.* FROM `projects`[0m
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2015-06-01 07:36:42 -0400
+Processing by ReviewsController#index as JSON
+  [1m[35mReview Load (0.3ms)[0m  SELECT `reviews`.* FROM `reviews`
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.3ms)
