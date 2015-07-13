@@ -6,22 +6,34 @@
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
     <script src="js/libs/app.js"></script>
-    
+    <link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script|Roboto' rel='stylesheet' type='text/css'>
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen" rel="stylesheet">
+    <link href="/css/styles.css" media="screen" rel="stylesheet">
+    
   </head>
   
   <body>
     <script type="text/x-handlebars">
+    <h1 class="text-center">Bear Renovations and Improvements</h1>  
     <nav class="navbar navbar-default">
-      <h1 class="text-center">Bear Renovations and Improvements</h1>
-      <ul class="nav navbar-nav">
-        <li>{{#link-to 'about'}}About{{/link-to}}</li>
-        <li>{{#link-to 'services'}}Services{{/link-to}}</li>
-        <li>{{#link-to 'reviews'}}Reviews{{/link-to}}</li>
-        <li>{{#link-to 'projects'}}Projects{{/link-to}}</li>
-      </ul>
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li>{{#link-to 'about'}}About{{/link-to}}</li>
+          <li>{{#link-to 'services'}}Services{{/link-to}}</li>
+          <li>{{#link-to 'reviews'}}Reviews{{/link-to}}</li>
+          <li>{{#link-to 'projects'}}Projects{{/link-to}}</li>
+        </ul>
+      </div>
     </nav>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     {{outlet}}
+          </div>
+        </div>
+      </div>
+
     </script>
     
     <script type="text/x-handlebars" data-template-name="about">

@@ -13,6 +13,8 @@ gem 'faker'
 
 gem 'active_model_serializers', '~> 0.8.1'
 
+gem 'sass-rails'
+
 # added this gem to allow CORS
 # gem 'rack-cors', require: 'rack/cors'
 
